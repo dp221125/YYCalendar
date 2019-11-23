@@ -112,7 +112,8 @@ import UIKit
 
     // Cannot use when keywindow is nil
     func viewNotReady() -> Bool {
-        return UIApplication.shared.keyWindow == nil
+//        return UIApplication.shared.keyWindow == nil
+        return Useful.getKeyWindow() == nil
     }
 
     // MARK: - Setup
@@ -167,11 +168,13 @@ import UIKit
             return
         }
 
-        let window = UIWindow(frame: (UIApplication.shared.keyWindow?.bounds)!)
+//        let window = UIWindow(frame: (UIApplication.shared.keyWindow?.bounds)!)
+        let window = UIWindow(frame: Useful.getKeyWindow()!.bounds)
         self.contentViewWindow = window
         self.contentViewWindow.backgroundColor = UIColor.clear
         self.contentViewWindow.rootViewController = self
-        self.previousWindow = UIApplication.shared.keyWindow
+//        self.previousWindow = UIApplication.shared.keyWindow
+        self.previousWindow = Useful.getKeyWindow()
     }
 
     func setupViews() {
@@ -179,7 +182,8 @@ import UIKit
             return
         }
 
-        self.view = UIView(frame: (UIApplication.shared.keyWindow?.bounds)!)
+//        self.view = UIView(frame: (UIApplication.shared.keyWindow?.bounds)!)
+        self.view = UIView(frame: Useful.getKeyWindow()!.bounds)
 
         // Setup Gesture
         if allowTouchOutsideToDismiss == true {

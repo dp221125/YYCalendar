@@ -84,6 +84,22 @@ class Useful {
     static func getUIColor(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> UIColor {
         return UIColor.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
+    
+    static func getKeyWindow() -> UIWindow? {
+        var keyWindow: UIWindow?
+        
+        if #available(iOS 13.0, *) {
+            keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+        } else {
+           keyWindow = UIApplication.shared.keyWindow
+        }
+        
+        return keyWindow
+    }
 }
 
 extension Date {
